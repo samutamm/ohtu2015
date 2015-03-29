@@ -19,6 +19,7 @@ public class Main {
         // seuraava asiakas
         kauppa.aloitaAsiointi();
         for (int i = 0; i < 24; i++) {
+            
             kauppa.lisaaKoriin(5);
         }
 

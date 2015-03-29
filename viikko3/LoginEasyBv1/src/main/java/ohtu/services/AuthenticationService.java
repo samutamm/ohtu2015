@@ -41,6 +41,20 @@ public class AuthenticationService {
     private boolean invalid(String username, String password) {
         // validity check of username and password
 
+
+        String pattern = "(?=.*[0-9])(?=.*[@#$%^&+=]).{8,}";
+        if (!password.matches(pattern)) {
+          return true;
+        }
+
+        String usernamePattern = "([a-z]+)(.{2,})";
+        if (!username.matches(usernamePattern)) {
+          return true;
+        }
+
+        if (userDao.findByName(username) != null) {
+          return true;
+        }
         return false;
     }
 }
