@@ -1,1 +1,9 @@
+
 /viikko2/Ohtu-NhlStatistics1/target/
+*.xxx
+
+target
+
+OhtuVarasto/target
+OhtuVarasto/.idea/
+OhtuVarasto/.idea
