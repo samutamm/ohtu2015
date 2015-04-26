@@ -1,5 +1,6 @@
 package com.mycompany.webkauppa;
 
+import com.mycompany.webkauppa.sovelluslogiikka.Varasto;
 import com.mycompany.webkauppa.ulkoiset_rajapinnat.PankkiFasaadi;
 import com.mycompany.webkauppa.ulkoiset_rajapinnat.ToimitusjarjestelmaFasaadi;
 import java.io.IOException;
@@ -8,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class HallintaServlet extends WebKauppaServlet {
+
+    public HallintaServlet(Varasto v) {
+        super(v);
+    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -1,19 +1,23 @@
 package com.mycompany.ohmawebkauppa.sovelluslogiikka.ohjaus;
 
+import com.mycompany.webkauppa.ohjaus.Komento;
 import com.mycompany.webkauppa.ohjaus.OstoksenLisaysKoriin;
 import com.mycompany.webkauppa.sovelluslogiikka.*;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import tehdas.Tehdas;
+import tehdas.TestiTehdas;
 
 
 public class OstoksenLisaysKoriinTest {
+    Tehdas tehdas;
     Varasto varasto = Varasto.getInstance();
     Ostoskori kori;    
     long tuoteid = 1;
     Tuote tuote;
     
-    OstoksenLisaysKoriin ostoksenLisays;
+    Komento ostoksenLisays;
     
     @Before
     public void setUp() {
@@ -21,12 +25,13 @@ public class OstoksenLisaysKoriinTest {
         if ( tuote.getSaldo()==0 ) {
             tuote.setSaldo(1);
         } 
-        kori = new Ostoskori();            
+        kori = new Ostoskori(); 
+        tehdas = new TestiTehdas();
     }
     
     @Test
     public void koriSisaltaaLisatynTuotteen() {
-        ostoksenLisays = new OstoksenLisaysKoriin(kori, tuoteid);
+        ostoksenLisays = tehdas.ostoksenLisaysKoriin(kori, tuoteid, varasto);
         ostoksenLisays.suorita();
     
         assertEquals(1, kori.tuotteitaKorissa());
@@ -38,7 +43,7 @@ public class OstoksenLisaysKoriinTest {
     public void tuotteenMaaraVahentyy(){
         int varastossaAluksi = varasto.etsiTuote(tuoteid).getSaldo();
         
-        ostoksenLisays = new OstoksenLisaysKoriin(kori, tuoteid);
+        ostoksenLisays = tehdas.ostoksenLisaysKoriin(kori, tuoteid, varasto);
         ostoksenLisays.suorita();
     
         assertEquals(varastossaAluksi-1, varasto.etsiTuote(tuoteid).getSaldo());
@@ -48,7 +53,7 @@ public class OstoksenLisaysKoriinTest {
     public void josTuotteenVarastosaldoNollaEiTuotettaLaitetaOstoskoriin() {
         varasto.etsiTuote(tuoteid).setSaldo(0);
         
-        ostoksenLisays = new OstoksenLisaysKoriin(kori, tuoteid);
+        ostoksenLisays = tehdas.ostoksenLisaysKoriin(kori, tuoteid, varasto);
         ostoksenLisays.suorita();
     
         assertEquals(0, kori.tuotteitaKorissa());

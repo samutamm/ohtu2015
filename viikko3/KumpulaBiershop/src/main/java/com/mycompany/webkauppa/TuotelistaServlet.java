@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class TuotelistaServlet extends WebKauppaServlet {
+
+    public TuotelistaServlet(Varasto v) {
+        super(v);
+    }
            
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

@@ -1,12 +1,17 @@
 
 package com.mycompany.webkauppa;
 
+import com.mycompany.webkauppa.sovelluslogiikka.Varasto;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class LisaaOstoskoriinServlet extends WebKauppaServlet {
+
+    public LisaaOstoskoriinServlet(Varasto v) {
+        super(v);
+    }
 
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -16,7 +21,7 @@ public class LisaaOstoskoriinServlet extends WebKauppaServlet {
                         
 //        OstoksenLisaysKoriin lisays = new OstoksenLisaysKoriin(haeSessionOstoskori(request), tuoteId);
 //        lisays.suorita();
-        komennot.ostoksenLisaysKoriin(haeSessionOstoskori(request), tuoteId).suorita();
+        komennot.ostoksenLisaysKoriin(haeSessionOstoskori(request), tuoteId, varasto).suorita();
         
         naytaSivu("/Tuotelista", request, response);   
     }

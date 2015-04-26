@@ -1,6 +1,7 @@
 
 package com.mycompany.webkauppa;
 
+import tehdas.Komentotehdas;
 import com.mycompany.webkauppa.sovelluslogiikka.Ostoskori;
 import com.mycompany.webkauppa.sovelluslogiikka.Varasto;
 import java.io.IOException;
@@ -17,8 +18,8 @@ public abstract class WebKauppaServlet extends HttpServlet {
     protected Varasto varasto;
     protected Komentotehdas komennot;
 
-    public WebKauppaServlet() {
-        varasto = Varasto.getInstance();
+    public WebKauppaServlet(Varasto v) {
+        varasto = v;
         komennot  = new Komentotehdas();
     }        
     

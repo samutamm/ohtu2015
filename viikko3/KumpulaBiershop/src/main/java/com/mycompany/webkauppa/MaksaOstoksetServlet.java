@@ -1,9 +1,11 @@
 package com.mycompany.webkauppa;
 
 import com.google.gson.Gson;
+import com.mycompany.webkauppa.ohjaus.Komento;
 import com.mycompany.webkauppa.sovelluslogiikka.Ostoskori;
 import com.mycompany.webkauppa.ohjaus.OstoksenSuoritus;
 import com.mycompany.webkauppa.sovelluslogiikka.Tuote;
+import com.mycompany.webkauppa.sovelluslogiikka.Varasto;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -11,6 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class MaksaOstoksetServlet extends WebKauppaServlet {
+
+    public MaksaOstoksetServlet(Varasto v) {
+        super(v);
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -36,8 +42,9 @@ public class MaksaOstoksetServlet extends WebKauppaServlet {
             ostoskori = muodostaOstoskori(request);
         }
 
-        OstoksenSuoritus ostos = new OstoksenSuoritus(nimi, osoite, luottokorttinumero, ostoskori);
-
+        Komento ostos = komennot.ostoksenSuoritus(nimi, osoite, luottokorttinumero, ostoskori, varasto);
+        
+        
         request.setAttribute("osoite", osoite);
         request.setAttribute("hinta", ostoskori.hinta());
 
