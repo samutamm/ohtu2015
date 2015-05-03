@@ -1,5 +1,6 @@
 package ohtu.kivipaperisakset;
 
+import ohtu.kivipaperisakset.kps.*;
 import java.util.Scanner;
 
 public class Paaohjelma {
@@ -18,15 +19,15 @@ public class Paaohjelma {
             String vastaus = scanner.nextLine();
             if (vastaus.endsWith("a")) {
                 System.out.println("peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s");
-                KPSPelaajaVsPelaaja kaksinpeli = new KPSPelaajaVsPelaaja();
+                KPS kaksinpeli = PeliTehdas.pelaajaVSpelaaja();
                 kaksinpeli.pelaa();
             } else if (vastaus.endsWith("b")) {
                 System.out.println("peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s");
-                KPSTekoaly yksinpeli = new KPSTekoaly();
+                KPS yksinpeli = PeliTehdas.tekoaly();
                 yksinpeli.pelaa();
             } else if (vastaus.endsWith("c")) {
                 System.out.println("peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s");
-                KPSParempiTekoaly pahaYksinpeli = new KPSParempiTekoaly();
+                KPS pahaYksinpeli = PeliTehdas.parempiTekoaly();
                 pahaYksinpeli.pelaa();
             } else {
                 break;
